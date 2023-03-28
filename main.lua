@@ -1,15 +1,15 @@
 --[[
     DOCUMENTATION:
-        utilities:isAlive(model character)
+        utilities:isAlive(Model character)
             -> Returns true if the character is alive (self-explanatory).
         
-        utilities:worldToScreenPoint(part object)
+        utilities:worldToScreenPoint(Part object)
             -> Returns the 2D point of an object.
         
         utilities:getClosestPlayerFromCursor(boolean teamCheck)
             -> Returns the closest player to your cursor. If the team check is enabled, it will skip over players on your team.
         
-        utilities:isVisible(part object, table ignorelist)
+        utilities:isVisible(Part object, table ignorelist)
             -> Returns true if the object is visible in your line of sight. The ignoreList parameter is used to ignore certain models, parts, etc.
 ]]
 
