@@ -4,7 +4,7 @@
             -> Returns true if the character is alive (self-explanatory).
         
         utilities:worldToScreenPoint(Part object)
-            -> Returns the 2D point of an object.
+            -> Returns the 2D point of an object, (optional) also returns if the object is on-screen.
         
         utilities:getClosestPlayerFromCursor(boolean teamCheck)
             -> Returns the closest player to your cursor. If the team check is enabled, it will skip over players on your team.
