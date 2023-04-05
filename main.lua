@@ -4,10 +4,16 @@
             -> Returns true if the character is alive (self-explanatory).
         
         utilities:worldToScreenPoint(Part object)
-            -> Returns the 2D point of an object, (optional) also returns if the object is on-screen.
+            -> Returns the 2D screen location of an object in the world, the depth of it from the screen and whether it is visible. Accounts for the GUI inset.
         
+        utilities:worldToViewportPoint(Part object)
+            -> Returns the 2D screen location of an object in the world, but does not account for the GUI inset.
+
         utilities:getClosestPlayerFromCursor(boolean teamCheck)
             -> Returns the closest player to your cursor. If the team check is enabled, it will skip over players on your team.
+
+        utilites:moveMouse(Part object)
+            -> Moves your mouse to the object that is passed through.
         
         utilities:isVisible(Part object, table ignorelist)
             -> Returns true if the object is visible in your line of sight. The ignoreList parameter is used to ignore certain models, parts, etc.
@@ -37,6 +43,7 @@ local currentCamera = workspace.CurrentCamera;
 -- << micro optimizations >> --
 local getPartsObscuringTarget = currentCamera.GetPartsObscuringTarget;
 local worldToScreenPoint = currentCamera.WorldToScreenPoint;
+local worldToViewportPoint = currentCamera.WorldToViewportPoint;
 local findFirstChildOfClass = game.FindFirstChildOfClass;
 local getPlayers = players.GetPlayers;
 local getMouseLocation = userInputService.GetMouseLocation;
@@ -57,7 +64,14 @@ local utilites = {} do
         local point3D, onScreen = worldToScreenPoint(currentCamera, object.Position);
         local point2D = vector2(point3D.X, point3D.Y);
 
-        return point2D, onScreen
+        return point2D, onScreen;
+    end;
+   
+    function utilites:worldToViewportPoint(object)
+        local point3D, onScreen = worldToViewportPoint(currentCamera, object.Position);
+        local point2D = vector2(point3D.X, point3D.Y);
+
+        return point2D, onScreen;
     end;
     
     function utilites:getClosestPlayerFromCursor(teamCheck)
@@ -85,6 +99,16 @@ local utilites = {} do
         end;
 
         return closestPlayer;
+    end;
+    
+    function utilites:moveMouseToObject(object)
+        -- // TODO: ADD A SMOOTHING OPTION
+        local point2D, onScreen = self:worldToViewportPoint(object)
+        if not onScreen then return end;
+
+        local mouseLocation = getMouseLocation(userInputService);
+        local relativePosition = (point2D - mouseLocation);
+        mousemoverel(relativePosition.X, relativePosition.Y);
     end;
     
     function utilites:isVisible(object, ignoreList)
