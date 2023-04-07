@@ -12,7 +12,7 @@
         utilities:getClosestPlayerFromCursor(boolean teamCheck)
             -> Returns the closest player to your cursor. If the team check is enabled, it will skip over players on your team.
 
-        utilites:moveMouse(Part object)
+        utilites:moveMouseToObject(Part object)
             -> Moves your mouse to the object that is passed through.
         
         utilities:isVisible(Part object, table ignorelist)
