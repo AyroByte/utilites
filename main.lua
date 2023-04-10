@@ -90,7 +90,7 @@ local utilites = {} do
             if not onScreen then continue; end;
 
             local mouseLocation = getMouseLocation(userInputService);
-            local distanceFromMouse = (point2D - mouseLocation).Magnitude;
+            local distanceFromMouse = (mouseLocation - point2D).Magnitude;
 
             if distanceFromMouse < lastDistance then
                 closestPlayer = player;
